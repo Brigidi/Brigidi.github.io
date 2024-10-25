@@ -88,7 +88,7 @@ a:hover{
 }
 
 /* ABOUT */
-.collapse{
+/* .collapse{
     background-color: inherit;
     cursor: pointer;
     padding: 18px;
@@ -103,15 +103,15 @@ a:hover{
     background-color: black;
     color: white;
     outline: none;
-  }
+  } */
   
-  .content {
+  /* .content {
     padding: 0 18px;
     display: none;
     overflow: hidden;
     background-color: #f8f8f8;
     outline: black dotted 1px;
-  }
+  } */
 
 
 /* CONTACT */
