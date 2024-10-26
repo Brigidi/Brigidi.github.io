@@ -39,7 +39,7 @@
         </div>
 
         <!--HTML FORM-->
-        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbwYByiPMHdme3K_JkVfTENuihkfqNKYVdbCYVp1HnHb06VaAbznWpbPOB_DlgXXlzuE/exec" method="POST">
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbyszSwVewVspWV35LEztlQsFHJSXC3Jg3X8rDchYlW4NcWvukQLEtjK7Hyq2EuA4IC5/exec" method="POST">
             Name: <input type="text" name="contact-name" required><br><br>
             Email: <input type="email" name="contact-email" required><br><br>
             Message: <textarea name="contact-message" required></textarea><br><br>
@@ -51,7 +51,7 @@
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            fetch('https://script.google.com/macros/s/AKfycbwYByiPMHdme3K_JkVfTENuihkfqNKYVdbCYVp1HnHb06VaAbznWpbPOB_DlgXXlzuE/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbyszSwVewVspWV35LEztlQsFHJSXC3Jg3X8rDchYlW4NcWvukQLEtjK7Hyq2EuA4IC5/exec', {
                 method: 'POST',
                 body: new URLSearchParams(new FormData(this))
             })
