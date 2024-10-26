@@ -31,7 +31,7 @@
         <!--CONTENT START-->
         <div class="container">
         <h1>
-            Contact Form
+            Contact
         </h1>
         <p>
             I am passionate about my work and love to connect with others. Please use the contact form below if you are interested in dicussing anything on this site — I will do my best to follow-up promptly!
@@ -39,7 +39,7 @@
         </div>
 
         <!--HTML FORM-->
-        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbwkPuDvDYJd5sVmawnzGqMCFhPA_XXCWPi35xRGUTgPWuOzehy5NKqb-hU6OWV8felc/exec" method="POST">
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbypUhbjATHbUKp-0XBoc-JPN9Z_7eM1IPxT6fy9kg_PSJMzaJLCnYbEXJHpmipcc7Z6/exec" method="POST">
             Name: <input type="text" name="contact-name" required><br><br>
             Email: <input type="email" name="contact-email" required><br><br>
             Message: <textarea name="contact-message" required></textarea><br><br>
@@ -51,7 +51,7 @@
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
-            fetch('https://script.google.com/macros/s/AKfycbwkPuDvDYJd5sVmawnzGqMCFhPA_XXCWPi35xRGUTgPWuOzehy5NKqb-hU6OWV8felc/exec', {
+            fetch('https://script.google.com/macros/s/AKfycbypUhbjATHbUKp-0XBoc-JPN9Z_7eM1IPxT6fy9kg_PSJMzaJLCnYbEXJHpmipcc7Z6/exec', {
                 method: 'POST',
                 body: new URLSearchParams(new FormData(this))
             })
