@@ -39,11 +39,37 @@
         </div>
 
         <!--HTML FORM-->
-        <form action="mailto: mattbrigidi.dev@gmail.com" method="POST" enctype="multipart/form-data" name="EmailForm">
-            Name: <input type="text" size="19" name="contact-name"><br><br>
-            Email: <input type="email" name="contact-email"><br><br>
-            Message: <textarea name="contact-message" rows="10" cols="20"></textarea><br><br>
-            <button type="submit" value="Submit">Send</button>
+        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbzLoCFtIDNUe49nC8zYk3pcraoEHlx48haYO2qqyiBwj1vJGWGmDPbebXsMONEZkzSx/exec" method="POST">
+            Name: <input type="text" name="contact-name" required><br><br>
+            Email: <input type="email" name="contact-email" required><br><br>
+            Message: <textarea name="contact-message" required></textarea><br><br>
+            <button type="submit">Send</button>
         </form>
+
+       <!--SCRIPT-->
+       <script>
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            fetch('https://script.google.com/macros/s/AKfycbzLoCFtIDNUe49nC8zYk3pcraoEHlx48haYO2qqyiBwj1vJGWGmDPbebXsMONEZkzSx/exec', {
+                method: 'POST',
+                body: new URLSearchParams(new FormData(this))
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    alert('Message sent successfully!');
+                    // Optionally reset the form
+                    this.reset();
+                } else {
+                    alert('Failed to send message.');
+                }
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+            });
+        });
+        </script> 
+        
     </body>
 </html>
