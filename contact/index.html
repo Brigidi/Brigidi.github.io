@@ -10,7 +10,7 @@
 
         <!--LINK-->
         <link rel="icon" href="/assets/beau_spirit.png">
-        <link rel="stylesheet" href="/style/style.css">
+        <link rel="stylesheet" href="../style/style.css">
     </head>
 
     <body>
@@ -38,13 +38,38 @@
         </p>
         </div>
 
-        <!--HTML FORM-->
-        <form id="contact-form" action="https://script.google.com/macros/s/AKfycbyRlFJcqhv_Vqrt6G2cXB52czly6K6YbA4g7gMutrka70_yOFPMbMZp6_WOKvU1GPvX/exec" method="POST">
-            Name: <input type="text" name="contact-name" required><br><br>
-            Email: <input type="email" name="contact-email" required><br><br>
-            Message: <textarea name="contact-message" required></textarea><br><br>
-            <button type="submit">Send</button>
+        <!-- HTML FORM -->
+        <div class="form-container" >
+            <form id="contact-form" action="https://script.google.com/macros/s/AKfycbyRlFJcqhv_Vqrt6G2cXB52czly6K6YbA4g7gMutrka70_yOFPMbMZp6_WOKvU1GPvX/exec" method="POST">
+
+            <!--INPUT BOX-->
+            <div class="input-box">
+                <input type="text" name="contact-name" placeholder=" " required>
+                <span>Name</span>
+            </div>
+
+            <!--INPUT BOX-->
+            <div class="input-box">
+                <input type="email" name="contact-email" placeholder=" " required>
+                <span>E-mail</span>
+            </div>
+
+            <!--TEXT AREA-->
+            <div class="input-box">
+                <textarea name="contact-message" placeholder=" " maxlength="300" required></textarea>
+                <span>Message</span>
+                <!-- <div id="char-count">300 characters remaining</div> -->
+                <div class="char-circle">
+                    <span id="char-count"></span>
+                </div>
+            </div>
+
+            <!--BUTTON-->
+            <button class="submit-btn">
+                Submit
+            </button>
         </form>
+        
 
        <!--SCRIPT-->
        <script>
@@ -69,6 +94,22 @@
                 alert('Error: ' + error);
             });
         });
+
+        /* circle */
+        const textarea = document.querySelector('textarea[name="contact-message"]');
+            const charCount = document.getElementById('char-count');
+            const charCircle = document.querySelector('.char-circle');
+            const maxChars = 300;
+
+            textarea.addEventListener('input', () => {
+                const charsTyped = textarea.value.length;
+                const remainingChars = maxChars - charsTyped;
+                charCount.textContent = remainingChars;
+
+                // Calculate the degree for the conic gradient
+                const fillDegree = (charsTyped / maxChars) * 360;
+                charCircle.style.background = `conic-gradient(#59b6b6 ${fillDegree}deg, lightgrey ${fillDegree}deg)`;
+            });
         </script> 
         
     </body>
