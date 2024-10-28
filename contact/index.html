@@ -86,6 +86,19 @@
                     alert('Message sent successfully!');
                     // Optionally reset the form
                     this.reset();
+    
+                    // Reset character count
+                    const textarea = document.querySelector('textarea[name="contact-message"]');
+                    const charCount = document.getElementById('char-count');
+                    const charCircle = document.querySelector('.char-circle');
+                    const maxChars = 300;
+    
+                    // Reset the character count display
+                    charCount.textContent = maxChars;
+    
+                    // Reset the textarea value and character count visualization
+                    textarea.value = '';
+                    charCircle.style.background = `conic-gradient(#59b6b6 0deg, lightgrey 0deg)`;
                 } else {
                     alert('Failed to send message.');
                 }
@@ -94,23 +107,24 @@
                 alert('Error: ' + error);
             });
         });
-
+    
         /* circle */
         const textarea = document.querySelector('textarea[name="contact-message"]');
-            const charCount = document.getElementById('char-count');
-            const charCircle = document.querySelector('.char-circle');
-            const maxChars = 300;
-
-            textarea.addEventListener('input', () => {
-                const charsTyped = textarea.value.length;
-                const remainingChars = maxChars - charsTyped;
-                charCount.textContent = remainingChars;
-
-                // Calculate the degree for the conic gradient
-                const fillDegree = (charsTyped / maxChars) * 360;
-                charCircle.style.background = `conic-gradient(#59b6b6 ${fillDegree}deg, lightgrey ${fillDegree}deg)`;
-            });
-        </script> 
+        const charCount = document.getElementById('char-count');
+        const charCircle = document.querySelector('.char-circle');
+        const maxChars = 300;
+    
+        textarea.addEventListener('input', () => {
+            const charsTyped = textarea.value.length;
+            const remainingChars = maxChars - charsTyped;
+            charCount.textContent = remainingChars;
+    
+            // Calculate the degree for the conic gradient
+            const fillDegree = (charsTyped / maxChars) * 360;
+            charCircle.style.background = `conic-gradient(#59b6b6 ${fillDegree}deg, lightgrey ${fillDegree}deg)`;
+        });
+    </script>
+    
         
     </body>
 </html>
