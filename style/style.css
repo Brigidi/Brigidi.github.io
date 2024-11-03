@@ -6,6 +6,14 @@ body{
     line-height: 1.7;
 }
 
+/* Header container to hold the image and nav on the same line */
+.header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    /* background-color: #333; */
+}
+
 .container{
     max-width: 700px;
     border: 12px;
@@ -29,6 +37,18 @@ iframe{
     padding: 20px;
 }
 
+/* photo */
+
+.me{
+    display: inline-flex;
+    overflow: hidden;
+    width: 85px;
+    height: auto;
+    border-style: solid;
+    float: left;
+    border-radius: 9999px;
+}
+
 /* NAV BAR */
 .topnav{
     display: inline-flex;
@@ -37,12 +57,14 @@ iframe{
     font-size: 22px;
     overflow: hidden;
     width: 100%;
-    margin-left: 0%;
+    margin-left: 0;
+    color: #f2f2f2;
     list-style-type: none;
+    background-color: #333;
 }
 
 .topnav a{
-    padding: 14px;
+    padding: 20px;
     text-decoration: none;
     display: inline-flex;
 }
@@ -53,20 +75,22 @@ iframe{
 
 .topnav a:hover{
     font-weight: 900;
+    /* color: #f2f2f2; */
     color: black;
+    background-color: white;
 }
 
 a:visited{
     color: inherit;
 }
 
-a:hover{
+/* a:hover{
     color: green;
-}
+} */
 
 /* HOME PAGE */
 
-.header{
+/* .header{
     text-align: center;
     margin-top: 30px;
     max-width: 600px;
@@ -74,18 +98,7 @@ a:hover{
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
-
-.me{
-    width: 225px;
-    height: auto;
-    border-style: solid;
-    float: right;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 9999px;
-    align-content: center;
-}
+} */
 
 /* ABOUT */
 /* .collapse{
