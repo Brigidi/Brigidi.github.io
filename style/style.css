@@ -67,7 +67,7 @@ iframe{
 .topnav a{
     padding: 20px;
     text-decoration: none;
-    display: inline-flex;
+    display: flex;
     color: white;
 }
 
