@@ -8,10 +8,13 @@ body{
 
 /* Header container to hold the image and nav on the same line */
 .header {
+    max-width: 1100px;
     display: flex;
     align-items: center;
     justify-content: space-between; /* Pushes content to opposite sides */
     padding: 20px;
+    margin-left: auto;
+    margin-right: auto;
     /* background-color: #333; */
 }
 
