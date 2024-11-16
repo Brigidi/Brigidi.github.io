@@ -83,6 +83,20 @@
                 x.className = "topnav";
               }
             }
+
+            function toggleMenu() {
+                const nav = document.getElementById("myTopnav");
+                nav.classList.toggle("responsive");
+            }
+
+            // Close the menu if clicked outside
+            document.addEventListener("click", function (event) {
+                const nav = document.getElementById("myTopnav");
+                const isClickInside = nav.contains(event.target);
+                if (!isClickInside && nav.classList.contains("responsive")) {
+                    nav.classList.remove("responsive");
+                }
+            });
             </script>
     </body>
 </html>
