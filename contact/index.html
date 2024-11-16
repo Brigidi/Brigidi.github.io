@@ -11,6 +11,8 @@
         <!--LINK-->
         <link rel="icon" href="/assets/beau_spirit.png">
         <link rel="stylesheet" href="../style/style.css">
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 
     <body>
@@ -20,15 +22,21 @@
             <img class="me" src="/assets/brigidi_head_shot.jpg">
         </a>    
 
-        <!--NAV BAR-->
-        <nav class="topnav" id="nav">
+         <!--NAV BAR-->
+        <nav class="topnav" id="myTopnav">
 
             <!--NAV OPTIONS-->
             <!-- <li><a href="/"> Home</a></li>
             <li>|</li> -->
-            <li><a href="/about/"> About</a></li>
-            <li><a href="/tutorials/"> Tutorials</a></li>
-            <li><a href="/contact/"> Contact</a></li>
+            <!-- Responsive Menu Icon -->
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+              </a>
+            <a href="/"> Home</a>
+            <a href="/about/"> About</a>
+            <a href="/tutorials/"> Tutorials</a>
+            <a href="/contact/"> Contact</a>
+            
         </nav>
         </div>
 
@@ -127,6 +135,18 @@
             const fillDegree = (charsTyped / maxChars) * 360;
             charCircle.style.background = `conic-gradient(#59b6b6 ${fillDegree}deg, lightgrey ${fillDegree}deg)`;
         });
+
+
+        /* responsive function */
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
+
     </script>
     
         

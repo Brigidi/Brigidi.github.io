@@ -10,6 +10,7 @@ body{
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Pushes content to opposite sides */
     padding: 20px;
     /* background-color: #333; */
 }
@@ -51,83 +52,53 @@ iframe{
 }
 
 /* NAV BAR */
-.topnav{
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 22px;
-    overflow: hidden;
-    width: 100%;
-    margin-left: 0;
-    color: #f2f2f2;
-    list-style-type: none;
+
+  /* Top navigation styles */
+.topnav {
     background-color: #333;
-}
-
-.topnav a{
-    padding: 20px;
-    text-decoration: none;
-    display: flex;
-    color: white;
-}
-
-.non-bold{
-    font-weight:100;
-}
-
-.topnav a:hover{
-    font-weight: 900;
-    /* color: #f2f2f2; */
-    color: black;
-    background-color: white;
-}
-
-/* a:visited{
-    color: inherit;
-} */
-
-/* a:hover{
-    color: green;
-} */
-
-/* HOME PAGE */
-
-/* .header{
-    text-align: center;
-    margin-top: 30px;
-    max-width: 600px;
-    padding-left: 250px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-} */
-
-/* ABOUT */
-/* .collapse{
-    background-color: inherit;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    border: none;
-    text-align: left;
-    outline: black dotted 1px;
-    font-size: 15px;
-  }
-  
-  .active, .collapse:hover {
-    background-color: black;
-    color: white;
-    outline: none;
-  } */
-  
-  /* .content {
-    padding: 0 18px;
-    display: none;
     overflow: hidden;
-    background-color: #f8f8f8;
-    outline: black dotted 1px;
-  } */
+    display: flexbox; /* Use flex for better alignment */
+    justify-content: flex-end; /* Align nav items to the right */
+    position: relative; /* Relative positioning for the dropdown */
+}
 
+/* Style the links */
+.topnav a {
+    color: #f2f2f2;
+    text-decoration: none;
+    padding: 14px 16px;
+    font-size: 17px;
+    display: none; /* Hidden by default for smaller screens */
+}
+
+/* Menu icon always visible */
+.topnav a.icon {
+    display: block;
+    color: #f2f2f2;
+    padding: 14px 16px;
+    cursor: pointer;
+}
+
+/* Show links when responsive class is added */
+.topnav.responsive a {
+    display: block;
+    text-align: left;
+    background-color: #333;
+    border-bottom: 1px solid #444;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Optional shadow */
+}
+
+/* Hover effect for links */
+.topnav a:hover {
+    background-color: #ddd;
+    color: black;
+}
+
+/* Active link style */
+.topnav a.active {
+    background-color: #04AA6D;
+    color: white;
+}
 
 /* CONTACT */
 
