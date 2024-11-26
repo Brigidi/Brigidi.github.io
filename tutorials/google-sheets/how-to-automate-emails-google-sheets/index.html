@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html>
+    <!--HEAD-->
+    <head>
+        <!--META-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="google sheets, google apps script, automated emails, gmail, email, programming">
+        <meta name="description" content="Automate HTML emails from a Google Sheet using Google's Apps Script programming language.">
+
+        <!--TITLE-->
+        <title>How to automate emails with Google Sheets</title>
+
+        <!--LINK-->
+        <link rel="canonical" href="https://www.mattbrigidi.com" />
+        <link rel="icon" href="/assets/matt_brigidi_dot_com.jpg">
+        <link rel="stylesheet" href="/style/style.css">
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Include Prism CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQGC5GKEKL"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GQGC5GKEKL');
+        </script>
+
+    <!--BODY-->
+    <body>
+        <div class="header">
+            <!--IMAGE-->
+        <a href="https://www.mattbrigidi.com">
+            <img class="me" src="assets/brigidi_head_shot.jpg">
+        </a>    
+
+        <!--NAV BAR-->
+        <nav class="topnav" id="myTopnav">
+
+            <!--NAV OPTIONS-->
+            <!-- <li><a href="/"> Home</a></li>
+            <li>|</li> -->
+            <a href="/about/"> About</a>
+            <a href="/tutorials/"> Tutorials</a>
+            <a href="/contact/"> Contact</a>
+             <!-- Responsive Menu Icon -->
+             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+              </a>
+            
+        </nav>
+    </div>
+
+        <!--TEXT-->
+        <div class="container">
+            <h1>
+                How to automate emails with Google Sheets
+            </h1>
+
+            <!--YOUTUBE VIDEO-->
+            <iframe src="https://www.youtube.com/embed/Hjn-z3FqiMc?si=6NL6AnydcNrT8u_3" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+
+            <img src="assets/how-to-automate-emails-google-sheets-google-apps-script.png" alt="automate google sheets emails" style="max-width: 700px; display: none;">
+
+            <p><b>Author</b>: Matt Brigidi | <b>Published</b>: Nov. 25, 2024</p>
+
+            <hr>
+
+            <!--INTRO-->
+
+            <p>
+                You can automate emails using Google Sheets and its native programming language Google Apps Script.
+            </p>
+            <p>
+                Apps Script uses Google’s version of the JavaScript programming language. 
+                It allows users to augment the native functionality of all of Google Drive’s productivity applications, 
+                such as Documents, Slides, and Gmail. 
+            </p>
+
+            <p>
+                This tutorial will focus on the fundamentals of sending an automated HTML email using data from a Google Sheet, 
+                which will populate a weekly email. You can use your own Google Sheet if you already have one; 
+                or you can follow along with the example by making a 
+                <a href="https://docs.google.com/spreadsheets/d/1x4GlxhqdNK1exTkDEm-CZNgQxvY03vZ9YaAN5iSWV90/edit?gid=0#gid=0">copy of my data sheet</a>.
+            </p>
+
+            <!--SECTION 1-->
+
+            <h2>
+                Create the Apps Script project
+            </h2>
+
+            <p>
+                We will be using a bound Apps Script project for this tutorial, 
+                which means that we will be creating a scripting project from the Google Sheet. 
+            </p>
+
+            <p>
+                You can create the project by navigating to the ‘Extensions’ section in the Google Sheets menu 
+                and then selecting the Apps Script option.
+            </p>
+
+            <p>
+                You can also use an unbound Apps Script project 
+                — which means that it is a standalone project not directly associated with the Google Sheet. 
+            </p>
+
+            <!--SECTION 2-->
+            
+            <h2>
+                Name the project
+            </h2>
+
+            <p>
+                You will have an “Untitled” Apps Script project. 
+            </p>
+
+            <p>
+                Begin by naming the project something that will be recognizable. 
+                Google will send you diagnostic reports if anything ever breaks down with your application. 
+                By giving the project a distinct name, you will more easily reacclimate to the project in the event that you 
+                have to do additional development work or manage bugs.
+            </p>
+
+            <p>
+                Try to think of your future self anytime you are programming. Providing that version of you every bit of context will be a huge help 
+                if you have to revisit something you did days, weeks, months, or years prior!
+            </p>
+
+            <!--IMAGE-->
+            <img src="assets/google_apps_script_new_project.png" alt="automate google sheets emails new project" style="max-width: 700px;">
+
+            <!--SECTION 3-->
+            
+            <h2>
+                Create a function
+            </h2>
+
+            <p>
+                New Google Apps Script projects will always open with a <b>script file</b> called “Code.gs”. 
+                It will have boilerplate code written for a function called “myFunction”. 
+                You can use that function if you would like to. 
+                I generally like to start from scratch because I like to maximize the amount of time I spend on my keyboard 
+                and minimize the amount of clicks I need with a mouse. 
+            </p>
+
+            <p>
+                Apps Script requires a function to execute a script file, 
+                so you’ll need to create a function if you want to get output in your console and/or action from your code.
+            </p>
+
+            <p>
+                You can name your function whatever you like, however, you’ll want to give it a distinct name. 
+                If your project has more than one function and they share a name, 
+                then Apps Script won’t know which function you want to run.
+            </p>
+
+            <p>
+                For this tutorial, I decided to call my function “<b>main</b>” and stored it in the “<b>Code.gs</b>” file.
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+
+}
+</code>
+</pre>
+
+            <!--SECTION 4-->
+
+            <h2>
+                Create an HTML file
+            </h2>
+
+            <p>
+                Navigate to the “Files” portion of the navigation bar and select the “+” icon.
+            </p>
+
+            <p>
+                You will be prompted with two options:
+            </p>
+
+            <ul>
+                <li>
+                    Script
+                </li>
+                <li>
+                    HTML
+                </li>
+            </ul>
+
+            <p>
+                We’ll want to create an HTML file, 
+                so that we can design the structure of our email, so that it has basic formatting, line breaks, and linked text.
+            </p>
+
+            <p>
+                Name your HTML file whatever you’d like; 
+                I’m following along with my YouTube tutorial, so I’ll be calling my HTML file “email”.
+            </p>
+
+            <!--SECTION 5-->
+
+            <h2>
+                Access the Google Sheets workbook
+            </h2>
+
+            <p>
+                We’ll begin coding by using the <b>SpreadsheetApp</b> class
+                , which will provide us with a range of methods and properties to interact with a Google Sheet.
+            </p>
+
+            <p>
+                You can access the spreadsheet in one of three ways:
+            </p>
+
+            <ul>
+                <li>
+                    getActiveSpreadsheet (<b>Note</b>: this is only available when using a bound Apps Script project)
+                </li>
+                <li>
+                    openById
+                </li>
+                <li>
+                    openByUrl
+                </li>
+            </ul>
+
+            <p>
+                We’ll be using the <b>getActiveSpreadsheet</b> method since we’re using a <b>bound</b> Apps Script project.
+            </p>
+
+            <p>
+                We’re going to create a variable, 
+                so that we can reference the spreadsheet connection throughout the script. 
+                We’ll use the acronym of “wb” to represent the “workbook”.
+            </p>
+
+            <p>
+                Your code will look like this:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+
+}
+</code>
+</pre>
+
+            <!--SECTION 6-->
+            <h2>
+                Access the Google Sheets data tab
+            </h2>
+
+            <p>
+                You will be able to access any sheet in the workbook using 
+                the native “getSheetByName” method.
+            </p>
+
+            <p>
+                This method is very common in tutorials but it is vulnerable to a significant flaw: 
+                if the name of the sheet changes, then the method will return an error. 
+            </p>
+
+            <p>
+                The optimal way to reference something is by using an ID, because IDs do not change.
+            </p>
+
+            <p>
+                Historically speaking, Apps Script did not have a native method for accessing sheets by their ID, which meant that you would have to build your own function.
+            </p>
+
+            <p>
+                However, there was a post on Reddit by <a href="https://github.com/jpoehnelt">Justin Poehnelt</a>, a Developer Relations Engineer at Google, 
+                that brought to my attention that <a href="https://www.reddit.com/r/GoogleAppsScript/comments/1gvtxve/seemingly_trivial_but_important_feature_requests/?rdt=32885">getSheetById had been added</a> to Apps Script. 
+                This is a wonderful development!
+            </p>
+
+            <p>
+                While it hasn’t been added to the <a href="https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet">official documentation</a> yet, 
+                accessing sheets using their ID is the most stable method. 
+                That means you have two options:
+            </p>
+
+            <ul>
+                <li>
+                    getSheetByName
+                </li>
+                <li>
+                    getSheetById
+                </li>
+            </ul>
+
+            <p>
+                I have not had a chance to use the Apps Script version of getSheetById yet; 
+                and given that it has not yet been added to the documentation, I don’t want this tutorial to include it only for it to be removed (for whatever reason).
+            </p>
+
+            <p>
+                So, for the sake of consistency with my original lesson, 
+                we will use getSheetByName because that’s what the original tutorial used. We will use the method with our “wb” variable and create a new variable called “sheet”.
+            </p>
+
+            <p>
+                Your code will now look like this:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');   
+
+}
+</code>
+</pre>
+
+            <!--SECTION 7-->
+
+            <h2>
+                Identify the data range from the Google Sheets tab
+            </h2>
+
+            <p>
+                The getRange method will allow you to access the rows and columns within a Google Sheet tab. The method has four arguments; two mandatory arguments and two optional arguments.
+            </p>
+
+            <p>
+                All arguments must be formatted as a number. 
+            </p>
+
+            <p>
+                The Mandatory arguments are:
+            </p>
+
+            <ul>
+                <li>
+                    Start Row
+                </li>
+                <li>
+                    Start Column
+                </li>
+            </ul>
+
+            <p>
+                The optional arguments are:
+            </p>
+
+            <ul>
+                <li>
+                    End Row
+                </li>
+                <li>
+                    End Column
+                </li>
+            </ul>
+
+            <p>
+                The getRange method has a numerical index that starts at 1, which means the first value is represented by the number 1.
+            </p>
+            
+            <!--SECTION 8-->
+
+            <h2>Apps Script data range methods</h2>
+
+            <p>Apps Script has four native methods that make using getRange really powerful:</p>
+
+            <ul>
+                <li>
+                    <b>getLastRow</b>, which returns the row number of the last row with a value
+                </li>
+                <li>
+                    <b>getLastColumn</b>, which returns the column number of the last column with a value
+                </li>
+                <li>
+                    <b>getMaxRow</b>, which returns the row number of the last row in the range (null included)
+                </li>
+                <li>
+                    <b>getMaxColumn</b>, which returns the column number of the last column in the range (null included)
+                </li>
+            </ul>
+
+            <p>
+                While they sound similar, the most significant difference is whether null values are included or excluded.
+            </p>
+
+            <p>
+                These methods are crucial in automating the extraction of data from Google Sheets, because they provide dynamic calculations that can respond to the expansion and/or contraction of the dataset. 
+            </p>
+
+            <!--SECTION 9-->
+
+            <h2>
+                Extract the values from the Google Sheets tab
+            </h2>
+
+            <p>
+                After you define your data range — which we will be doing shortly — you’ll need to use an additional method to get the values from the range (aka your data).
+            </p>
+
+            <p>
+                There are a few different methods to extract data values:
+            </p>
+
+            <ul>
+                <li>
+                    <b>getValue</b>, which returns a single value in an array
+                </li>
+                <li>
+                    <b>getValues</b>, which returns multiple values in a two-dimensional array
+                </li>
+                <li>
+                    <b>getDisplayValue</b>, which returns a single value as a string in an array
+                </li>
+                <li>
+                    <b>getDisplayValues</b>, which returns multiple values; and all the values will be formatted as a string in a two-dimensional array
+                </li>
+            </ul>
+
+            <p>
+                I recommend using either <b>getValues</b> or <b>getDisplayValues</b>, because both methods support single 
+                <i>and</i> multiple results; while getValue and getDisplayValue only return a single result. 
+            </p>
+
+            <p>
+                It’s important to identify what you want to do with your data once you extract it:
+            </p>
+
+            <ul>
+                <li>If you want to continue transforming number data types (integers and floats) in Apps Script, then you’ll want to use the getValues method</li>
+                <li>If you want to use the data as it appears in your Google Sheet with no additional transformation, then you’ll want to use getDisplayValues</li>
+            </ul>
+
+            <p>
+                I typically use <b>getDisplayValues</b> because I try to do as much of my data transformation before it gets to the Apps Script portion of my workflow. 
+                    Therefore, I don’t need additional math operations before I can use my data (in this case, in an email). 
+            </p>
+
+            <p>
+                If you do want to continue transforming your data, then you’ll need to use getValues. 
+                The reason is because getDisplayValues extracts all data as a string, which means numbers will become string objects and can no longer have math operations applied to them. 
+            </p>
+
+            <p>
+                Essentially, the numbers appear as numbers to your eyes but the computer processes them as if they were a letter. 
+            </p>
+
+            <!--SECTION 10-->
+
+            <h2>
+                Use getRange and getDisplayValues to extract data from Google Sheets
+            </h2>
+
+            <p>
+                The getRange method will identify the data range and the getDisplayValues method will extract the values.
+            </p>
+
+            <p>
+                In this scenario, we want to extract the most recent line of data, meaning, the last row with data in the Google Sheets tab called “Summary”. Therefore, we need to dynamically identify the last row with data, which is why we’ll be using the getLastRow method.
+            </p>
+
+            <p>
+                We’ll resume coding by creating a variable, so that we can reference our data extraction later in the script. I chose to name my variable “data”; you can name your variable whatever you want. 
+            </p>
+
+            <p>
+                The first argument of the getRange method is the row to start at, so, we will be using the sheet variable with the getLastRow method to identify the last row with data.
+            </p>
+
+            <p>
+                The second argument of the getRange method is the column to start at. This is a fixed value because we want to start at the first column in the data range. Therefore, we can hardcode a value of 1. 
+            </p>    
+
+            <p>
+                The third argument of the getRange method is the number of rows we want to include. Even though this is an optional argument, we need to enter a value here because we want to extract more than a single value of data. This is also a fixed value because we only want one row of data (the last row in the sheet with data, to be precise). 
+            </p>
+
+            <p>
+                The final argument of the getRange method is the number of columns to include. This <i>could</i> be a fixed value but my preference is to use a dynamic reference, so that the script is at least collecting the values (even if it doesn’t use them). Therefore, I will be using the getLastColumn method to identify the last column with data (you can hardcode the value if you so choose).
+            </p>
+
+            <p>
+                After completing the input values for getRange, you will use the getDisplayValues method to extract the values from the sheet. 
+            </p>
+
+            <p>
+                Additionally, we will be adding a logging statement, so that we have some feedback in our console to ensure that we have successfully extracted the values we want.
+            </p>
+
+            <p>
+                You code should look something like this:
+            </p>
+
+            <pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues(); 
+
+    }
+</code>
+</pre>
+            
+         <!--SECTION 11-->   
+            <h2>
+                Create a template for the HTML file
+            </h2>
+
+            <p>
+                We need to establish a connection between the script file and the HTML file.
+            </p>
+
+            <p>
+                We’ll do this by declaring a variable called htmlTemplate, 
+                which will reference a method from the <a href="https://developers.google.com/apps-script/reference/html/html-service">HtmlService class</a>.
+            </p>
+
+            <p>
+                The HtmlService class has a method called createTemplateFromFile that allows us to reference an HTML file. 
+                The createTemplateFromFile method requires the input value to be structured as a sting, so we will pass the name of the HTML file 
+                — in my case, the file name is “email” — surrounded by quotation marks.
+            </p>
+
+            <p>
+                Your code will now look like this:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+    
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');          
+
+    }
+</code>
+</pre>
+
+        <!--SECTION 12-->    
+
+            <h2>
+                Reference Google Sheet data points for HTML file
+            </h2>
+
+            <p>
+                We’ll use the “htmlTemplate” variable to define data points, so that we can access them within our HTML file.
+            </p>
+
+            <p>
+                The process for doing this is to reference the “htmlTemplate” variable then add a dot and a variable name. 
+                Then, we’ll reference the “data” variable and access each data point that we want to use in our email.
+            </p>
+
+            <p>
+                For example, the second value in our “Summary” tab is a person’s name. We could use the following to create a variable called “name” that can be used in our HTML file:
+            </p>
+
+            <p>Additionally, we could also save the data extracts as variables. That’s what I did in my script, because I wanted to use those variables in other places in my script. </p>
+
+            <p>That would look like this:</p>
+
+<pre>
+<code class="language-javascript">
+htmlTemplate.name = data[0][1]
+</code>
+</pre>
+
+            <p>
+                Since we used the getDisplayValues method to extract the values from the Google Sheet, the data variable is structured as a two-dimensional array. In order to get a value from a two-dimensional array, we need to define:
+            </p>
+
+            <ul>
+                <li>The array we want</li>
+                <li>The element we want</li>
+            </ul>
+
+            <p>
+                Arrays default to an index that starts at 0, which means the first value is represented by 0. Therefore, if we want to access the first array, we use 0. If we want to access the second element in the array, then we use the number 1.
+            </p>
+            
+            <p>
+                For this project, I want to use four data points that exist in the Google Sheets tab at Columns 2, 4, 5, and 6. Remember: Google Sheets have an index that starts at 1. After we extract the data using the Apps Script getDisplayValues method, the values are structured as two-dimensional arrays, which have a 0 index.
+            </p>
+            
+            <p>
+                That means we need to translate our Columns into the correct reference numbers:
+            </p>
+
+            <table>
+                <thead>
+                    <th>Column Letter</th>
+                    <th>Column Number</th>
+                    <th>Index: 0</th>
+                    <th>Index: 1</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>A</td>
+                        <td>1</td>
+                        <td>0</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>B</td>
+                        <td>2</td>
+                        <td>1</td>
+                        <td>2</td>
+                    </tr>
+                    <tr>
+                        <td>C</td>
+                        <td>3</td>
+                        <td>2</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>D</td>
+                        <td>4</td>
+                        <td>3</td>
+                        <td>4</td>
+                    </tr>
+                    <tr>
+                        <td>E</td>
+                        <td>5</td>
+                        <td>4</td>
+                        <td>5</td>
+                    </tr>
+                    <tr>
+                        <td>F</td>
+                        <td>6</td>
+                        <td>5</td>
+                        <td>6</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>
+                So, each of our “html variables” will need to have a name, as well as reference where they exist in the data variable just as we did with the “name” example. 
+                You can use any names you want but if you want to follow along with me, then you can reference my code below:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+    
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');    
+    
+    // define data points
+        var name = data[0][1];
+        var inventory = data[0][3];
+        var grossRev = data[0][4];
+        var netRev = data[0][5];
+    
+    // define html variables
+        htmlTemplate.name = name;
+        htmlTemplate.inventory = inventory;
+        htmlTemplate.grossRev = grossRev;
+        htmlTemplate.netRev = netRev;
+}
+</code>
+</pre>
+
+        <!--SECTION 13-->
+
+            <h2>
+                Send email to multiple accounts using Google Apps Script
+            </h2>
+
+            <p>
+                Google Apps Script allows for up to 50 accounts to receive an email.
+            </p>
+
+            <p>
+                You need to structure the mailing list as an array with each address separated by a comma. You can either hardcode the list at the end of your script or you can create a variable with email addresses.
+            </p>
+
+            <p>
+                I prefer to create a mailing list variable, because I think it’s easier to maintain when hardcoding the addresses directly into the editor. You can find an example of my code below:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+    
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');    
+    
+    // define data points
+        var name = data[0][1];
+        var inventory = data[0][3];
+        var grossRev = data[0][4];
+        var netRev = data[0][5];
+    
+    // define html variables
+        htmlTemplate.name = name;
+        htmlTemplate.inventory = inventory;
+        htmlTemplate.grossRev = grossRev;
+        htmlTemplate.netRev = netRev;
+    
+    // mailing list
+        var listPpl = ['your_email@email.com', 'another_email@email.com'];
+}
+</code>
+</pre>
+
+        <!--SECTION 14-->
+
+            <h2>
+                Evaluate the HTML file content
+            </h2>
+
+            <p>
+                Essentially, we need to create a connection from our HTML file back to our Script file, so that we can use the Script file to send the HTML as the body of the email.
+            </p>
+
+            <p>
+                We can accomplish this by using the htmlTemplate variable we created earlier.
+            </p>
+
+            <p>
+                We’ll create a new variable called “htmlForEmail” that is set equal to the htmlTemplate variable. 
+                We’ll use two additional methods — evaluate and getContent — in order to get the contents of the HTML file.
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');    
+
+    // define data points
+        var name = data[0][1];
+        var inventory = data[0][3];
+        var grossRev = data[0][4];
+        var netRev = data[0][5];
+
+    // define html variables
+        htmlTemplate.name = name;
+        htmlTemplate.inventory = inventory;
+        htmlTemplate.grossRev = grossRev;
+        htmlTemplate.netRev = netRev;
+
+    // mailing list
+        var listPpl = ['your_email@email.com', 'another_email@email.com'];  
+
+    // evaluates the template and returns an htmploutput object
+        var htmlForEmail = htmlTemplate.evaluate().getContent();
+}
+</code>
+</pre>
+
+        <!--SECTION 15-->
+
+            <h2>
+                Send email using the GmailApp
+            </h2>
+
+            <p>
+                The <a href="https://developers.google.com/apps-script/reference/gmail/gmail-app">GmailApp is a class</a> 
+                just like the SpreadsheetApp, which is what we used to extract data from the Google Sheet.
+            </p>
+
+            <p>
+                GmailApp has a method called “sendEmail”, which is the method I recommend when attempting to automate emails. Now, I use Gmail and typically send emails to other people who use Gmail (I work for a company that used Google’s productivity suite).
+            </p>
+
+            <p>
+                If you have issues with using the GmailApp, there is also a mailApp class that has much of the same functionality.
+            </p>
+
+            <p>
+                The sendEmail method has four inputs:
+            </p>
+
+            <ul>
+                <li>Recipient(s)</li>
+                <li>Subject line</li>
+                <li>Body of the email</li>
+                <li>Options</li>
+            </ul>
+
+            <p>
+                Since we are sending an HTML email using an HTML file, we’re going to need to use the options portion of the method. Your code will end up looking like this:
+            </p>
+
+<pre>
+<code class="language-javascript">
+// send the email
+    GmailApp.sendEmail(
+        listPpl,
+        'Status Report for ' + name,
+        'This email contains html',
+        {htmlBody: htmlForEmail}
+    );  
+</code>
+</pre>
+
+            <p>
+                The first input is the variable that references our email array. You can also hardcode the email(s) if you would like.
+            </p>
+
+            <p>
+                The second input is the subject line. In my example, I am using the name variable with some boilerplate text. This way, the recipient has a personalized subject.
+            </p>
+
+            <p>
+                The third input is usually the body of the message. However, since we are using an HTML file, we will use this section to add a message if the HTML does not display for some reason.
+            </p>
+
+            <p>
+                The fourth input is where we can set additional options. In this case, we will use the htmlBody options to reference the “htmlForBody” variable, which is using the getContent method from the HtmlService to get our HTML file’s content.
+            </p>
+
+            <p>
+                The code for all that looks like this:
+            </p>
+
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+    
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');    
+    
+    // define data points
+        var name = data[0][1];
+        var inventory = data[0][3];
+        var grossRev = data[0][4];
+        var netRev = data[0][5];
+    
+    // define html variables
+        htmlTemplate.name = name;
+        htmlTemplate.inventory = inventory;
+        htmlTemplate.grossRev = grossRev;
+        htmlTemplate.netRev = netRev;
+    
+    // mailing list
+        var listPpl = ['your_email@email.com', 'another_email@email.com'];  
+    
+    // evaluates the template and returns an htmploutput object
+        var htmlForEmail = htmlTemplate.evaluate().getContent();
+    
+    // send the email
+        GmailApp.sendEmail(
+        listPpl,
+        'Status Report for ' + name,
+        'This email contains html',
+        {htmlBody: htmlForEmail}
+        );  
+    
+    }
+</code>
+</pre>
+
+        <!--SECTION 16-->
+            <h2>
+                Code HTML Email using Google Sheets data
+            </h2>
+
+            <p>
+                When you created your HTML file, Apps Script auto-populated boilerplate HTML code.
+            </p>
+
+            <p>
+                We’ll be focusing on writing a few paragraphs, so we’ll be working inside the <b>body</b> tags. You don’t need to know much HTML, but I think understanding the basics is a good idea. I will link my code after the next section, so that you can copy it into your project.
+            </p>
+
+            <p>
+                The concepts I’m using include:
+            </p>
+
+            <ul>
+                <li>
+                    Creating paragraphs using “p” tags
+                </li>
+                <li>
+                    Adding some styling with an “unorganized list” aka “ul” tags
+                </li>
+                <li>
+                    Adding some “list items” using “li” tags
+                </li>
+            </ul>
+
+
+            <p>
+                HTML is pretty straightforward, so if you’re exploring Apps Script, 
+                then I’d recommend looking into it via YouTube tutorials or intro resources like those provided by <a href="https://www.w3schools.com/html/">W3 Schools</a>.
+            </p>
+
+        <!--SECTION 17-->    
+            <h2>
+                How to use variables from Script file in HTML
+            </h2>
+
+            <p>You can reference your variables by using the following format:</p>
+            
+<pre>
+<code class="language-html">
+/* this should be the name from your Code.gs file */    
+&lt;?= variable_from_code_gs ?&gt;
+</code>
+</pre>
+                
+            
+            <p>This will allow you to dynamically populate values into your HTML from your Google Sheet.</p>
+            
+            <h2>
+                Tying it all together
+            </h2>
+            
+            <p>That’s it! You should be able to send an email using the most recently added data from your Google Sheets workbook tab!</p>
+            
+            <p>Here is the full code:</p>
+
+            <h2>
+                Project Directory
+            </h2>
+            
+            <!--IMAGE-->
+            <img src="assets/google_apps_script_automate_email_directory.png" alt="automate google sheets emails completed project directory" style="max-width: 700px;">
+            
+            <h2>
+                Code.gs File
+            </h2>
+            
+<pre>
+<code class="language-javascript">
+function main() {
+
+    // access the Google Sheet
+        var wb = SpreadsheetApp.getActiveSpreadsheet();
+    
+    // access the sheet with the data
+        var sheet = wb.getSheetByName('Summary');
+    
+    // access the data in a variable
+        var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues();
+    
+    // create template object for dynamically constructing html
+        var htmlTemplate = HtmlService.createTemplateFromFile('email');    
+    
+    // define data points
+        var name = data[0][1];
+        var inventory = data[0][3];
+        var grossRev = data[0][4];
+        var netRev = data[0][5];
+    
+    // define html variables
+        htmlTemplate.name = name;
+        htmlTemplate.inventory = inventory;
+        htmlTemplate.grossRev = grossRev;
+        htmlTemplate.netRev = netRev;
+    
+    // mailing list
+        var listPpl = ['your_email@email.com', 'another_email@email.com'];  
+    
+    // evaluates the template and returns an htmploutput object
+        var htmlForEmail = htmlTemplate.evaluate().getContent();
+    
+    // send the email
+        GmailApp.sendEmail(
+        listPpl,
+        'Status Report for ' + name,
+        'This email contains html',
+        {htmlBody: htmlForEmail}
+        );  
+    
+    }
+</code>
+</pre>
+                
+            
+            <h2>
+                email.html File
+            </h2>
+            
+<pre>
+<code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+    &lt;base target="_top"&gt;
+    &lt;/head&gt;
+    &lt;body&gt;
+    &lt;p&gt;Hello, I hope this email finds you well — &lt;/p&gt;
+    &lt;p&gt;Enclosed is a status report about &lt;?= name ?&gt;. The following is how the are currently progressing towards their month end targets:&lt;/p&gt;
+    &lt;ul&gt;
+        &lt;li&gt;Inventory: &lt;?= inventory ?&gt;&lt;/li&gt;
+        &lt;li&gt;Gross Revenue: &lt;?= grossRev ?&gt;&lt;/li&gt;
+        &lt;li&gt;Net Revenue: &lt;?= netRev ?&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+    &lt;p&gt;Please reach out in the event of an error. This is an automated email, so please excuse any delays in response as I might not presently be at a computer.&lt;/p&gt;
+    &lt;/body&gt;
+&lt;/html&gt;
+    
+</code>
+</pre>
+
+            <br>
+            <hr>
+
+            <p>
+                <i>I hope you found this tutorial helpful. Please check out the Technology Tutorial section of this site for more lessons or check out my YouTube channel for all my videos.</i>
+            </p>
+
+            <h2>
+                Learn more about automating Emails with Google Sheets & Apps Script
+            </h2>
+            <ul>
+            <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXwHsf-NxF3RzWDVBQARMGx4&si=KaN7ZQBkyNJflj8o">Automate Emails</a></li>
+            <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXwRQZ6sDpJJpcjoa7XPUPhW&si=y4cjnTvi5GYbRZib">Automate Google Sheets</a></li>
+            <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXw_8CzO8aQ5NhkJ0dVt7Zj0&si=OYny3Eg6zXIMNPcI">Automate Google Slides</a></li>
+            </ul> 
+
+        </div>
+
+
+        <!-- Include Prism JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script> <!-- For HTML -->
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
+
+            function toggleMenu() {
+                const nav = document.getElementById("myTopnav");
+                nav.classList.toggle("responsive");
+            }
+
+            // Close the menu if clicked outside
+            document.addEventListener("click", function (event) {
+                const nav = document.getElementById("myTopnav");
+                const isClickInside = nav.contains(event.target);
+                if (!isClickInside && nav.classList.contains("responsive")) {
+                    nav.classList.remove("responsive");
+                }
+            });
+            </script>
+
+        <!--COPY button-->    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".container"); // Replace with your actual container class or ID
+                const codeBlocks = container.querySelectorAll("pre");
+
+                codeBlocks.forEach((block) => {
+                    // Create and style the button
+                    const button = document.createElement("button");
+                    button.textContent = "Copy";
+                    button.className = "copy-button";
+                    block.style.position = "relative"; // Ensure `pre` is positioned for the button
+
+                    // Position the button inside the `pre` element
+                    button.style.position = "absolute";
+                    button.style.top = "10px";
+                    button.style.right = "10px";
+                    block.appendChild(button);
+
+                    // Add the click event for copying code
+                    button.addEventListener("click", () => {
+                        const code = block.querySelector("code").innerText;
+                        navigator.clipboard
+                            .writeText(code)
+                            .then(() => {
+                                button.textContent = "Copied!";
+                                setTimeout(() => {
+                                    button.textContent = "Copy";
+                                }, 2000);
+                            })
+                            .catch((err) => {
+                                console.error("Failed to copy code: ", err);
+                            });
+                    });
+                });
+            });
+
+        </script>
+    </body>
+</html>

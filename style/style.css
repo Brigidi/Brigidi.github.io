@@ -32,14 +32,21 @@ p{
     overflow: hidden;
 }
 
-iframe{
+.container iframe {
+    width: 100%; /* Matches the container width */
+    height: auto; /* Ensures the aspect ratio is maintained */
+    display: block; /* Removes inline-block extra spacing */
+    aspect-ratio: 16 / 9; /* Maintains the 16:9 aspect ratio */
+}
+
+/* iframe{
     display: block;
     margin-left: auto;
     margin-right: auto;
     align-content: center;
     border: 12px;
     padding: 20px;
-}
+} */
 
 /* photo */
 
@@ -248,3 +255,69 @@ h2 {
     color: black;
     align-items: center;
 }
+
+
+/* Code blocks */
+
+pre {
+    background-color: #272822; /* Dark background for code blocks */
+    color: #f8f8f2; /* Light text */
+    padding: 15px;
+    border-radius: 8px; /* Rounded corners */
+    overflow-x: auto; /* Enable horizontal scrolling for long lines */
+    max-width: 1000px; /* Ensure it doesn't exceed the container width */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    white-space: pre-wrap; /* Wrap text and remove literal indentation */
+    word-wrap: break-word;
+}
+
+/* copy button */
+.copy-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 12px;
+    z-index: 1;
+}
+
+.copy-button:hover {
+    background-color: #0056b3;
+}
+
+
+/* table */
+table{
+    border-collapse: collapse;
+    border-radius: 15px;
+    margin: 25px 0;
+    font-family: sans-serif;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 650px;
+    text-align: center;
+    table-layout: fixed;
+  }
+
+  thead tr {
+    background-color: black;
+    color: #ffffff;
+    padding: 12px 15px;
+  }
+
+  td {
+    padding: 12px 15px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid #dddddd;
+  }
+
+  tbody tr:last-of-type {
+    border-bottom: 2px solid #009870;
+  }
+
