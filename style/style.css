@@ -335,7 +335,7 @@ table{
 }
 
   /* table */
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 650px) {
     table{
         border-collapse: collapse;
         border-radius: 15px;
