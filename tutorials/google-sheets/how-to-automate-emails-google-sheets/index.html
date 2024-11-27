@@ -69,7 +69,7 @@
                 referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
             </iframe>
 
-            <img src="assets/how-to-automate-emails-google-sheets-google-apps-script.png" alt="automate google sheets emails" style="max-width: 700px; display: none;">
+            <img src="assets/how-to-automate-emails-google-sheets-google-apps-script.png" alt="automate google sheets emails" style="display: none;">
 
             <p><b>Author</b>: Matt Brigidi | <b>Published</b>: Nov. 25, 2024</p>
 
@@ -78,11 +78,11 @@
             <!--INTRO-->
 
             <p>
-                You can automate emails using Google Sheets and its native programming language Google Apps Script.
+                You can automate emails using Google Sheets and its native programming language <a href="https://developers.google.com/apps-script">Google Apps Script</a>.
             </p>
             <p>
                 Apps Script uses Google’s version of the JavaScript programming language. 
-                It allows users to augment the native functionality of all of Google Drive’s productivity applications, 
+                It allows users to augment the native functionality of Google Drive’s productivity applications, 
                 such as Documents, Slides, and Gmail. 
             </p>
 
@@ -93,6 +93,11 @@
                 <a href="https://docs.google.com/spreadsheets/d/1x4GlxhqdNK1exTkDEm-CZNgQxvY03vZ9YaAN5iSWV90/edit?gid=0#gid=0">copy of my data sheet</a>.
             </p>
 
+            <p>
+                The completed project code files can be found at the bottom of the lesson; 
+                everything before then explains each step of the process.
+            </p>
+
             <!--SECTION 1-->
 
             <h2>
@@ -101,12 +106,12 @@
 
             <p>
                 We will be using a bound Apps Script project for this tutorial, 
-                which means that we will be creating a scripting project from the Google Sheet. 
+                which means it was created from the Google Sheet. 
             </p>
 
             <p>
-                You can create the project by navigating to the ‘Extensions’ section in the Google Sheets menu 
-                and then selecting the Apps Script option.
+                You can create the project by navigating to the ‘<b>Extensions</b>’ section in the Google Sheets menu 
+                and then selecting the <b>Apps Script</b> option.
             </p>
 
             <p>
@@ -137,7 +142,7 @@
             </p>
 
             <!--IMAGE-->
-            <img src="assets/google_apps_script_new_project.png" alt="automate google sheets emails new project" style="max-width: 700px;">
+            <img src="assets/google_apps_script_new_project.png" alt="automate google sheets emails new project">
 
             <!--SECTION 3-->
             
@@ -146,7 +151,7 @@
             </h2>
 
             <p>
-                New Google Apps Script projects will always open with a <b>script file</b> called “Code.gs”. 
+                New Google Apps Script projects will always open with a <b>script file</b> called “<b>Code.gs</b>”. 
                 It will have boilerplate code written for a function called “myFunction”. 
                 You can use that function if you would like to. 
                 I generally like to start from scratch because I like to maximize the amount of time I spend on my keyboard 
@@ -184,7 +189,7 @@ function main() {
             </h2>
 
             <p>
-                Navigate to the “Files” portion of the navigation bar and select the “+” icon.
+                Navigate to the “<b>Files</b>” portion of the navigation bar and select the “+” icon.
             </p>
 
             <p>
@@ -207,8 +212,12 @@ function main() {
 
             <p>
                 Name your HTML file whatever you’d like; 
-                I’m following along with my YouTube tutorial, so I’ll be calling my HTML file “email”.
+                I’m following along with my <a href="https://youtu.be/Hjn-z3FqiMc?si=0xdgk5f674Qc8rr_">YouTube tutorial</a>
+                , so I’ll be calling my HTML file “<b>email</b>”.
             </p>
+
+            <!--IMAGE-->
+            <img src="assets/google_apps_script_automate_email_directory.png" alt="automate google sheets emails completed project directory">
 
             <!--SECTION 5-->
 
@@ -217,8 +226,8 @@ function main() {
             </h2>
 
             <p>
-                We’ll begin coding by using the <b>SpreadsheetApp</b> class
-                , which will provide us with a range of methods and properties to interact with a Google Sheet.
+                We’ll begin coding by using the <b><a href="https://developers.google.com/apps-script/reference/spreadsheet/spreadsheet-app">SpreadsheetApp</a></b> class, 
+                which will provide us with a range of methods and properties to interact with a Google Sheet.
             </p>
 
             <p>
@@ -475,7 +484,8 @@ function main() {
             </p>
 
             <p>
-                In this scenario, we want to extract the most recent line of data, meaning, the last row with data in the Google Sheets tab called “Summary”. Therefore, we need to dynamically identify the last row with data, which is why we’ll be using the getLastRow method.
+                In this scenario, we want to extract the most recent line of data, meaning, the last row with data in the Google Sheets tab called “Summary”. 
+                Therefore, we need to dynamically identify the last row with data, which is why we’ll be using the getLastRow method.
             </p>
 
             <p>
@@ -486,31 +496,61 @@ function main() {
                 The first argument of the getRange method is the row to start at, so, we will be using the sheet variable with the getLastRow method to identify the last row with data.
             </p>
 
+<pre>
+<code class="language-javascript">
+// first argument example
+    var data = sheet.getRange(sheet.getLastRow()) 
+</code>
+</pre>
+
             <p>
                 The second argument of the getRange method is the column to start at. This is a fixed value because we want to start at the first column in the data range. Therefore, we can hardcode a value of 1. 
-            </p>    
+            </p>  
+            
+<pre>
+<code class="language-javascript">
+// second argument example
+    var data = sheet.getRange(sheet.getLastRow(), 1) 
+</code>
+</pre>
 
             <p>
                 The third argument of the getRange method is the number of rows we want to include. Even though this is an optional argument, we need to enter a value here because we want to extract more than a single value of data. This is also a fixed value because we only want one row of data (the last row in the sheet with data, to be precise). 
             </p>
 
+<pre>
+<code class="language-javascript">
+// third argument example
+    var data = sheet.getRange(sheet.getLastRow(), 1, 1) 
+</code>
+</pre>
+
             <p>
                 The final argument of the getRange method is the number of columns to include. This <i>could</i> be a fixed value but my preference is to use a dynamic reference, so that the script is at least collecting the values (even if it doesn’t use them). Therefore, I will be using the getLastColumn method to identify the last column with data (you can hardcode the value if you so choose).
             </p>
+
+<pre>
+<code class="language-javascript">
+// fourth argument example
+    var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()) 
+</code>
+</pre>
 
             <p>
                 After completing the input values for getRange, you will use the getDisplayValues method to extract the values from the sheet. 
             </p>
 
             <p>
-                Additionally, we will be adding a logging statement, so that we have some feedback in our console to ensure that we have successfully extracted the values we want.
+                Additionally, we will be adding a logging statement, 
+                so that we have some feedback in our console to ensure that we have successfully extracted the values we want.
+                If you do not see the data range you want, then go back to the start of this section and make sure you've correctly followed the instructions.
             </p>
 
             <p>
                 You code should look something like this:
             </p>
 
-            <pre>
+<pre>
 <code class="language-javascript">
 function main() {
 
@@ -522,6 +562,9 @@ function main() {
     
     // access the data in a variable
         var data = sheet.getRange(sheet.getLastRow(), 1, 1, sheet.getLastColumn()).getDisplayValues(); 
+
+        // logging for transparency
+            Logger.log(data);
 
     }
 </code>
@@ -623,8 +666,8 @@ htmlTemplate.name = data[0][1]
 
             <table>
                 <thead>
-                    <th>Column Letter</th>
-                    <th>Column Number</th>
+                    <th>Letter</th>
+                    <th>Number</th>
                     <th>Index: 0</th>
                     <th>Index: 1</th>
                 </thead>
@@ -989,7 +1032,7 @@ function main() {
             </h2>
             
             <!--IMAGE-->
-            <img src="assets/google_apps_script_automate_email_directory.png" alt="automate google sheets emails completed project directory" style="max-width: 700px;">
+            <img src="assets/google_apps_script_automate_email_directory.png" alt="automate google sheets emails completed project directory">
             
             <h2>
                 Code.gs File
