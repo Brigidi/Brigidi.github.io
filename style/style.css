@@ -259,7 +259,7 @@ table{
     margin: 25px 0;
     font-family: sans-serif;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    width: 650px;
+    width: 100%;
     text-align: center;
     table-layout: fixed;
   }
@@ -334,17 +334,9 @@ table{
     }
 }
 
-  /* table */
-  @media screen and (max-width: 650px) {
-    table{
-        border-collapse: collapse;
-        border-radius: 15px;
-        margin: 25px 0;
-        font-family: sans-serif;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-        max-width: 100%;
-        text-align: center;
-        table-layout: fixed;
-        overflow-x: auto;
-      }
+/* Parent container for scrolling */
+.table-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile */
+    width: 100%; /* Ensure the container doesn't exceed the viewport */
 }
