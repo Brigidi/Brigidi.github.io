@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+    <!--HEAD-->
+    <head>
+        <!--META-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="google sheets, google apps script, automated emails, gmail, email, programming">
+        <meta name="description" content="Automate HTML emails from a Google Sheet using Google's Apps Script programming language.">
+
+        <!--TITLE-->
+        <title>How to automate emails with Google Sheets</title>
+
+        <!--LINK-->
+        <link rel="canonical" href="https://www.mattbrigidi.com" />
+        <link rel="icon" href="/assets/matt_brigidi_dot_com.jpg">
+        <link rel="stylesheet" href="/style/style.css">
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Include Prism CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQGC5GKEKL"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GQGC5GKEKL');
+        </script>
+
+    <!--BODY-->
+    <body>
+        <div class="header">
+            <!--IMAGE-->
+        <a href="https://www.mattbrigidi.com">
+            <img class="me" src="/assets/brigidi_head_shot.jpg">
+        </a>    
+
+        <!--NAV BAR-->
+        <nav class="topnav" id="myTopnav">
+
+            <!--NAV OPTIONS-->
+            <!-- <li><a href="/"> Home</a></li>
+            <li>|</li> -->
+            <a href="/about/"> About</a>
+            <a href="/tutorials/"> Tutorials</a>
+            <a href="/contact/"> Contact</a>
+             <!-- Responsive Menu Icon -->
+             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+              </a>
+            
+        </nav>
+    </div>
+
+        <!--TEXT-->
+        <div class="container">
+            <h1>
+                Google Sheets Tutorials
+            </h1>
+
+            <section class="content-grid">
+
+                <a href="https://www.mattbrigidi.com" class="card-link">
+                    <div class="card">
+                        <img src="assets/how-to-automate-emails-google-sheets-google-apps-script copy.png" alt="automate emails">
+                        <div class="card-container">
+                            <h4>
+                                Automate Emails
+                            </h4>
+                            <p>
+                                Learn to use Google Sheets data in HTML emails
+                            </p>
+                        </div>
+                    </div>
+                </a>
+
+            </section>
+
+            
+        </div>
+
+
+        <!-- Include Prism JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script> <!-- For HTML -->
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
+
+            function toggleMenu() {
+                const nav = document.getElementById("myTopnav");
+                nav.classList.toggle("responsive");
+            }
+
+            // Close the menu if clicked outside
+            document.addEventListener("click", function (event) {
+                const nav = document.getElementById("myTopnav");
+                const isClickInside = nav.contains(event.target);
+                if (!isClickInside && nav.classList.contains("responsive")) {
+                    nav.classList.remove("responsive");
+                }
+            });
+            </script>
+
+        <!--COPY button-->    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".container"); // Replace with your actual container class or ID
+                const codeBlocks = container.querySelectorAll("pre");
+
+                codeBlocks.forEach((block) => {
+                    // Create and style the button
+                    const button = document.createElement("button");
+                    button.textContent = "Copy";
+                    button.className = "copy-button";
+                    block.style.position = "relative"; // Ensure `pre` is positioned for the button
+
+                    // Position the button inside the `pre` element
+                    button.style.position = "absolute";
+                    button.style.top = "10px";
+                    button.style.right = "10px";
+                    block.appendChild(button);
+
+                    // Add the click event for copying code
+                    button.addEventListener("click", () => {
+                        const code = block.querySelector("code").innerText;
+                        navigator.clipboard
+                            .writeText(code)
+                            .then(() => {
+                                button.textContent = "Copied!";
+                                setTimeout(() => {
+                                    button.textContent = "Copy";
+                                }, 2000);
+                            })
+                            .catch((err) => {
+                                console.error("Failed to copy code: ", err);
+                            });
+                    });
+                });
+            });
+
+        </script>
+    </body>
+</html>

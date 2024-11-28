@@ -340,3 +340,27 @@ table{
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for mobile */
     width: 100%; /* Ensure the container doesn't exceed the viewport */
 }
+
+/* cards */
+.card-link {
+    text-decoration: none; /* Remove underline from the link */
+    color: inherit; /* Ensure the text inside maintains the card's color scheme */
+    display: block; /* Makes the <a> tag span the full width and height of the card */
+}
+
+.card {
+    /* Add shadows to create the "card" effect */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    cursor: pointer;
+  }
+  
+  /* Add some padding inside the card container */
+  .card-container {
+    padding: 2px 16px;
+  }
