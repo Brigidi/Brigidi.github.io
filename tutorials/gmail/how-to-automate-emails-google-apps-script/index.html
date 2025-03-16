@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html>
+    <!--HEAD-->
+    <head>
+        <!--META-->
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="google sheets, google apps script, automated emails, gmail, email, programming, google forms, survey">
+        <meta name="description" content="Automate HTML emails using Google's Apps Script programming language.">
+
+        <!--TITLE-->
+        <title>How to automate emails with Google Apps Script</title>
+
+        <!--LINK-->
+        <link rel="canonical" href="https://www.mattbrigidi.com" />
+        <link rel="icon" href="/assets/matt_brigidi_dot_com.jpg">
+        <link rel="stylesheet" href="/style/style.css">
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- Include Prism CSS -->
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+
+    </head>
+
+    <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQGC5GKEKL"></script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-GQGC5GKEKL');
+        </script>
+
+    <!--BODY-->
+    <body>
+        <div class="header">
+            <!--IMAGE-->
+        <a href="https://www.mattbrigidi.com">
+            <img class="me" src="/assets/brigidi_head_shot.jpg">
+        </a>    
+
+        <!--NAV BAR-->
+        <nav class="topnav" id="myTopnav">
+
+            <!--NAV OPTIONS-->
+            <a href="/"> Home</a>
+            <a href="/about/"> About</a>
+            <a href="/tutorials/"> Tutorials</a>
+            <a href="/contact/"> Contact</a>
+             <!-- Responsive Menu Icon -->
+             <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+                <i class="fa fa-bars"></i>
+              </a>
+            
+        </nav>
+    </div>
+
+        <!--TEXT-->
+        <div class="container">
+            <h1>
+                How to automate emails with Google Apps Script
+            </h1>
+
+            <!--YOUTUBE VIDEO-->
+            <iframe src="https://www.youtube.com/embed/7DL8W3BRFxE?si=a1ZCFKlG0kdxGj8I" title="YouTube video player" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+            </iframe>
+
+            <img src="assets/google_apps_script_automate_email.png" alt="automate emails with google apps script" style="display: none;">
+
+            <p><b>Author</b>: Matt Brigidi | <b>Published</b>: March 16, 2025</p>
+
+            <hr>
+
+            <p>
+            You can automate emails using Google’s native programming language Google Apps Script.
+            </p>
+            
+            <p>
+            Apps Script uses Google’s version of the JavaScript programming language. It allows users to augment the native functionality of Google Drive’s productivity applications, such as Documents, Sheets, Slides, and Gmail. 
+            </p>
+            
+            <p>
+            This tutorial will focus on the fundamentals of sending an automated HTML email using Google Apps Script. 
+            </p>
+            
+            <h1>
+            Create the Apps Script project
+            </h1>
+            
+            You’ll begin by creating a project folder in Google Drive. Once inside the project folder, you’ll create an unbound App Script by selecting the <b>“+ New”</b> button in the upper-left corner of the Google Drive window and then moving your cursor over the <b>“More”</b> sub-menu.
+            
+            Select the option to create an Apps Script project.
+            
+            <h1>
+            Bound compared to Unbound Apps Script projects
+            </h1>
+            
+            <p>
+            There are two types of Apps Script projects: 
+            </p>
+            
+            <ul>
+            <li><b>Bound</b>, which means the project was created from — and is directly associated with — a Google Drive productivity app such as Google Documents or Google Sheets, etc.</li>
+            <li><b>Unbound</b>, which means the project was created as a standalone file that is not directly associated with another Google Drive app</li>
+            </ul>
+            
+            <p>
+            The only significant difference between the two types is that <b>bound</b> projects can access the app it was created from using methods that reference the “active” file; while unbound projects need to define the file it wants to connect to using the <b>File ID</b> or the <b>File URL.</b>
+            </p>
+            
+            <p>
+            Otherwise, all aspects of the two types are the same.
+            </p>
+            
+            <h1>Create your function</h1>
+            
+            <p>
+            New Google Apps Script projects will always open with a <b>script file</b> called “Code.gs”. It will have boilerplate code written for a function called “myFunction”. You can use that function name if you would like to. I generally like to start from scratch because I like to maximize the amount of time I spend on my keyboard and minimize the amount of clicks I need with a mouse. 
+            <p>
+            
+            <p>
+            Apps Script requires a function to execute a script file, so you’ll need to create a function if you want to get output in your console and/or action from your code.
+            </p>
+            
+            <p>
+            You can name your function whatever you like, however, you’ll want to give it a distinct name. If your project has more than one function and they share a name, then Apps Script won’t know which function you want to run.
+            </p>
+            
+            <p>
+            For this tutorial, I decided to call my function “<b>autoEmail</b>” and stored it in the “<b>Code.gs</b>” file.
+            </p>
+
+<pre>
+<code class="language-javascript">
+function autoEmail() {
+
+
+}
+</code>
+</pre>         
+            
+            <h1>Create an HTML file</h1>
+            
+            <p>
+            Navigate to the “Files” portion of the navigation bar and select the “+” icon.
+            </p>
+            
+            <p>
+            You will be prompted with two options:
+            </p>
+            
+            <ul>
+            <li>Script</li>
+            <li>HTML</li>
+            </ul>
+            
+            <p>
+            We’ll want to create an HTML file, so that we can design the structure of our email, so that it has basic formatting, line breaks, and linked text.
+            <p>
+            
+            <p>
+            Name your HTML file whatever you’d like; I’m following along with my YouTube tutorial, so I’ll be calling my HTML file “email”.
+            </p>
+            
+            <h1>
+            Create a template for the HTML file
+            </h1>
+            
+            We need to establish a connection between the script file and the HTML file. 
+            
+            We’ll do this by declaring a variable called htmlTemplate, which will reference a method from the HtmlService class. 
+            
+            https://developers.google.com/apps-script/reference/html/html-service
+            
+            <p>
+            The HtmlService class has a method called createTemplateFromFile that allows us to reference an HTML file. The createTemplateFromFile method requires the input value to be structured as a sting, so we will pass the name of the HTML file — in my case, the file name is “email” — surrounded by quotation marks.
+            </p>
+            
+            <p>
+            Your code will now look like this:
+            </p>
+            
+<pre>
+<code class="language-javascript">
+function autoEmail() {
+
+// connect to the html template
+    var html = HtmlService.createTemplateFromFile('email');
+}
+</code>
+</pre>
+            
+            <h1>
+            Evaluate the HTML file content
+            </h1>
+            
+            <p>
+            Essentially, we need to create a connection from our HTML file back to our Script file, so that we can use the Script file to send the HTML as the body of the email.
+            </p>
+            
+            <p>
+            We can accomplish this by using the htmlTemplate variable we created earlier.
+            </p>
+            
+            <p>
+            We’ll create a new variable called “htmlForEmail” that is set equal to the htmlTemplate variable. We’ll use two additional methods — evaluate and getContent — in order to get the contents of the HTML file.
+            </p>
+
+<pre>
+<code class="language-javascript">
+function autoEmail() {
+
+// connect to the html template
+    var html = HtmlService.createTemplateFromFile('email');
+
+// connect the template so you can send it via gmail app
+    var emailContent = html.evaluate().getContent();
+    
+}
+</code>
+</pre>
+            
+            <h1>Send email using the GmailApp</h1>
+    
+    <p>
+    The <a href="https://developers.google.com/apps-script/reference/gmail/gmail-app">GmailApp is a class</a> just like the SpreadsheetApp, which is what we used to extract data from the Google Sheet. 
+    </p>
+    
+    <p>
+    GmailApp has a method called “sendEmail”, which is the method I recommend when attempting to automate emails. Now, I use Gmail and typically send emails to other people who use Gmail (I work for a company that uses Google’s productivity suite). 
+    </p>
+    
+    <p>
+    If you have issues with using the GmailApp, there is also a mailApp class that has much of the same functionality. 
+    </p>
+    
+    <p>
+    The sendEmail method has four inputs:
+    </p>
+    
+    <ul>
+    <li>Recipient(s)</li>
+    <li>Subject line</li>
+    <li>Body of the email</li>
+    <li>Options</li>
+    </ul>
+    
+    <p>
+    Since we are sending an HTML email using an HTML file, we’re going to need to use the options portion of the method. Your code will end up looking like this:
+    </p>
+    
+<pre>
+<code class="language-javascript">
+
+// send email
+    GmailApp.sendEmail(
+    ["EMAIL@your_email.com", "EMAIL_2@your_email.com"],
+    "Reminder to pick up groceries",
+    "Please use gmail",
+    {htmlBody: emailContent}
+    )                   
+
+</code>
+</pre>
+    
+    <p>
+    The first input is the variable that references our email variable. You can also hardcode the email(s) if you would like.
+    </p>
+    
+    <p>
+    The second input is the subject line. In my example, I am using the name variable with some boilerplate text. This way, the recipient has a personalized subject.
+    </p>
+    
+    <p>
+    The third input is usually the body of the message. However, since we are using an HTML file, we will use this section to add a message if the HTML does not display for some reason.
+    </p>
+    
+    </p>
+    The fourth input is where we can set additional options. In this case, we will use the htmlBody options to reference the “htmlForBody” variable, which is using the getContent method from the HtmlService to get our HTML file’s content.
+    </p>
+    
+    <p>
+    The code for all that looks like this:
+    </p>
+    
+<pre>
+<code class="language-javascript">
+function autoEmail() {
+// connect to the html template
+    var html = HtmlService.createTemplateFromFile('email');
+
+// connect the template so you can send it via gmail app
+    var emailContent = html.evaluate().getContent();
+
+// send email
+    GmailApp.sendEmail(
+    ["EMAIL@your_email.com", "EMAIL_2@your_email.com"],
+    "Reminder to pick up groceries",
+    "Please use gmail",
+    {htmlBody: emailContent}
+    )    
+}
+</code>
+</pre>
+    
+    <h1>Code HTML Email using Google Sheets data</h1>
+    
+    <p>
+    When you created your HTML file, Apps Script auto-populated boilerplate HTML code. 
+    </p>
+    
+    <p>
+    We’ll be focusing on writing a few paragraphs, so we’ll be working inside the <b>body</b> tags. You don’t need to know much HTML, but I think understanding the basics is a good idea. I will link my code after the next section, so that you can copy it into your project.
+    </p>
+    
+    <p>
+    HTML is pretty straightforward, so if you’re exploring Apps Script, then I’d recommend looking into it via YouTube tutorials or intro resources like those provided by <a href="https://www.w3schools.com/html/">W3 Schools</a>.
+    </p>
+
+    
+    <h1> Tying it all together </h1>
+    
+    <p>
+    That’s it! You should be able to send an email using the most recently added data from your Google Sheets workbook tab!
+    </p>
+    
+    
+    <p>
+    Here is the full code:
+    </p>
+    <h1>Code.gs File</h1>
+    
+<pre>
+<code class="language-javascript">
+function autoEmail() {
+// connect to the html template
+    var html = HtmlService.createTemplateFromFile('email');
+
+// connect the template so you can send it via gmail app
+    var emailContent = html.evaluate().getContent();
+
+// send email
+    GmailApp.sendEmail(
+    ["mattbrigidi.dev@gmail.com", "mattbrigidi@gmail.com"],
+    "Reminder to pick up groceries",
+    "Please use gmail",
+    {htmlBody: emailContent}
+    )    
+}
+</code>
+</pre>
+    
+    <h1>email.html File</h1>
+    
+<pre>
+<code class="language-html">
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;base target="_top"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Hello,&lt;/p&gt;
+    &lt;p&gt;This is a reminder to pick up the groceries this week.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+
+</code>
+</pre>
+    
+    <h1>Project Directory</h1>
+    
+    <!--IMAGE-->
+    <img src="assets/google_apps_script_automate_email_forms_directory.png" alt="automate google sheets emails completed project directory">
+    
+    <hr>
+    
+    <p>
+    I hope you found this tutorial helpful. Please check out the Technology Tutorial section of this site for more lessons or check out my YouTube channel for all my videos.
+    </p>
+    
+    <h2>
+        Learn more about automating Emails with Google Sheets & Apps Script
+    </h2>
+    <ul>
+    <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXwHsf-NxF3RzWDVBQARMGx4&si=KaN7ZQBkyNJflj8o">Automate Emails</a></li>
+    <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXwRQZ6sDpJJpcjoa7XPUPhW&si=y4cjnTvi5GYbRZib">Automate Google Sheets</a></li>
+    <li><a href="https://youtube.com/playlist?list=PL_xiAt6o4ZXw_8CzO8aQ5NhkJ0dVt7Zj0&si=OYny3Eg6zXIMNPcI">Automate Google Slides</a></li>
+    </ul> 
+
+        <!-- Include Prism JS -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script> <!-- For HTML -->
+
+        <script>
+            function myFunction() {
+              var x = document.getElementById("myTopnav");
+              if (x.className === "topnav") {
+                x.className += " responsive";
+              } else {
+                x.className = "topnav";
+              }
+            }
+
+            function toggleMenu() {
+                const nav = document.getElementById("myTopnav");
+                nav.classList.toggle("responsive");
+            }
+
+            // Close the menu if clicked outside
+            document.addEventListener("click", function (event) {
+                const nav = document.getElementById("myTopnav");
+                const isClickInside = nav.contains(event.target);
+                if (!isClickInside && nav.classList.contains("responsive")) {
+                    nav.classList.remove("responsive");
+                }
+            });
+            </script>
+
+        <!--COPY button-->    
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const container = document.querySelector(".container"); // Replace with your actual container class or ID
+                const codeBlocks = container.querySelectorAll("pre");
+
+                codeBlocks.forEach((block) => {
+                    // Create and style the button
+                    const button = document.createElement("button");
+                    button.textContent = "Copy";
+                    button.className = "copy-button";
+                    block.style.position = "relative"; // Ensure `pre` is positioned for the button
+
+                    // Position the button inside the `pre` element
+                    button.style.position = "absolute";
+                    button.style.top = "10px";
+                    button.style.right = "10px";
+                    block.appendChild(button);
+
+                    // Add the click event for copying code
+                    button.addEventListener("click", () => {
+                        const code = block.querySelector("code").innerText;
+                        navigator.clipboard
+                            .writeText(code)
+                            .then(() => {
+                                button.textContent = "Copied!";
+                                setTimeout(() => {
+                                    button.textContent = "Copy";
+                                }, 2000);
+                            })
+                            .catch((err) => {
+                                console.error("Failed to copy code: ", err);
+                            });
+                    });
+                });
+            });
+
+        </script>
+    </body>
+</html>
