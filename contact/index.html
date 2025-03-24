@@ -62,7 +62,7 @@
         </div>
 
         
-        <div class="form-container" >
+        <!-- <div class="form-container" >
             <form id="contact-form" action="https://script.google.com/macros/s/AKfycby27vpFU8ND7guymkODQTWTCVPUUX5rPTmsKVaXnrlZGWRU31x6oknU88hW02_qa2Tv/exec" method="POST">
 
             
@@ -94,11 +94,11 @@
             <button class="submit-btn">
                 Submit
             </button>
-        </form>
+        </form> -->
         
 
        <!--SCRIPT-->
-       <script>
+       <!-- <script>
         document.getElementById('contact-form').addEventListener('submit', function(event) {
             event.preventDefault();
             
@@ -144,39 +144,39 @@
                 return; // Stop form submission
             }
 
-            // Proceed with form submission
-            fetch('https://script.google.com/macros/s/AKfycbyRlFJcqhv_Vqrt6G2cXB52czly6K6YbA4g7gMutrka70_yOFPMbMZp6_WOKvU1GPvX/exec', {
-                method: 'POST',
-                body: new URLSearchParams(new FormData(this))
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    alert('Message sent successfully!');
+        //     // Proceed with form submission
+        //     fetch('https://script.google.com/macros/s/AKfycbyRlFJcqhv_Vqrt6G2cXB52czly6K6YbA4g7gMutrka70_yOFPMbMZp6_WOKvU1GPvX/exec', {
+        //         method: 'POST',
+        //         body: new URLSearchParams(new FormData(this))
+        //     })
+        //     .then(response => response.json())
+        //     .then(data => {
+        //         if (data.status === 'success') {
+        //             alert('Message sent successfully!');
                     
-                    // Optionally reset the form
-                    this.reset();
+        //             // Optionally reset the form
+        //             this.reset();
 
-                    // Reset character count
-                    const textarea = document.querySelector('textarea[name="contact-message"]');
-                    const charCount = document.getElementById('char-count');
-                    const charCircle = document.querySelector('.char-circle');
-                    const maxChars = 300;
+        //             // Reset character count
+        //             const textarea = document.querySelector('textarea[name="contact-message"]');
+        //             const charCount = document.getElementById('char-count');
+        //             const charCircle = document.querySelector('.char-circle');
+        //             const maxChars = 300;
 
-                    // Reset the character count display
-                    charCount.textContent = maxChars;
+        //             // Reset the character count display
+        //             charCount.textContent = maxChars;
 
-                    // Reset the textarea value and character count visualization
-                    textarea.value = '';
-                    charCircle.style.background = `conic-gradient(#59b6b6 0deg, lightgrey 0deg)`;
-                } else {
-                    alert('Failed to send message.');
-                }
-            })
-            .catch(error => {
-                alert('Error: ' + error);
-            });
-        });
+        //             // Reset the textarea value and character count visualization
+        //             textarea.value = '';
+        //             charCircle.style.background = `conic-gradient(#59b6b6 0deg, lightgrey 0deg)`;
+        //         } else {
+        //             alert('Failed to send message.');
+        //         }
+        //     })
+        //     .catch(error => {
+        //         alert('Error: ' + error);
+        //     });
+        // });
 
     
         /* circle */
@@ -206,7 +206,7 @@
               }
             }
 
-    </script>
+    </script> -->
     
         
     </body>
